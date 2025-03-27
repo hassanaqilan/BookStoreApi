@@ -1,0 +1,1 @@
+flake8 . && isort --check --diff . && mypy book_store_api
