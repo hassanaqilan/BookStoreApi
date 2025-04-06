@@ -19,7 +19,7 @@ class BaseRepo(Generic[E]):
     ) -> E | None:
 
         if not connection:
-            raise ConnectionRefusedError('Check the docker container')
+            raise ConnectionRefusedError("Check the docker container")
 
         stmt = (
             insert(self.table).returning(*self.table.columns).values(**entity.to_dict())

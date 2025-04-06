@@ -20,18 +20,25 @@ class MemberService:
         return insert
 
     @uow
-    async def fetch(self, id: int, connection: Optional[AsyncConnection] = None) -> "Member" | Any:
+    async def fetch(
+        self, id: int, connection: Optional[AsyncConnection] = None
+    ) -> "Member" | Any:
         fetch = await self.member_repo.fetch(id, connection)
         return fetch
 
     @uow
-    async def fetch_all(self, connection: Optional[AsyncConnection] = None) -> list[Member] | Any:
+    async def fetch_all(
+        self, connection: Optional[AsyncConnection] = None
+    ) -> list[Member] | Any:
         fetch_all = await self.member_repo.fetch_all(connection=connection)
         return fetch_all
 
     @uow
     async def update(
-        self, id: int, member: dict[str, Any], connection: Optional[AsyncConnection] = None
+        self,
+        id: int,
+        member: dict[str, Any],
+        connection: Optional[AsyncConnection] = None,
     ) -> "Member" | Any:
 
         old_book = await self.member_repo.fetch(id, connection=connection)

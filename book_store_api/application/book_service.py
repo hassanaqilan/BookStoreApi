@@ -29,7 +29,9 @@ class BookService(BaseService):
         return insert
 
     @uow
-    async def fetch(self, id: int, connection: Optional[AsyncConnection] = None) -> Book | None:
+    async def fetch(
+        self, id: int, connection: Optional[AsyncConnection] = None
+    ) -> Book | None:
         fetch = await self.book_repo.fetch(id, connection=connection)
         return fetch
 
@@ -37,12 +39,17 @@ class BookService(BaseService):
     async def fetch_all(
         self, connection: Optional[AsyncConnection] = None, page_size: int = 5
     ) -> list[BookJoined] | None:
-        fetch_all = await self.book_repo.fetch_all(connection=connection, page_size=page_size)
+        fetch_all = await self.book_repo.fetch_all(
+            connection=connection, page_size=page_size
+        )
         return fetch_all
 
     @uow
     async def update(
-        self, id: int, data: dict[str, Any], connection: Optional[AsyncConnection] = None
+        self,
+        id: int,
+        data: dict[str, Any],
+        connection: Optional[AsyncConnection] = None,
     ) -> Book | None:
         # validate it's a book
         old_book = await self.book_repo.fetch(id, connection=connection)
@@ -52,11 +59,15 @@ class BookService(BaseService):
         for key, value in data.items():
             if hasattr(old_book, key):
                 setattr(old_book, key, value)
-        update = await self.book_repo.update(id, old_book.to_dict(), connection=connection)
+        update = await self.book_repo.update(
+            id, old_book.to_dict(), connection=connection
+        )
         return update
 
     @uow
-    async def delete(self, id: int, connection: Optional[AsyncConnection] = None) -> Book | None:
+    async def delete(
+        self, id: int, connection: Optional[AsyncConnection] = None
+    ) -> Book | None:
         delete = await self.book_repo.delete(id, connection=connection)
         return delete
 

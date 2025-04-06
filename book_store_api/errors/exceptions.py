@@ -25,14 +25,17 @@ class BookNotFoundError(BookStoreApiError):
 
 class BookAlreadyBorrowed(BookStoreApiError):
     """za book is borrowed my guy"""
+
     pass
 
 
 class MemberNotFound(BookStoreApiError):
     """za book is borrowed my guy"""
+
     pass
 
 
 class ErrorInDBC(BookStoreApiError):
     """Error in database"""
+
     pass
